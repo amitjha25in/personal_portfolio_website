@@ -52,10 +52,32 @@ effect_timeline.from(".navigation", {
         ease: "power3.out"
     })
 
+let windowWidth = $(window).width();
+let top_ = 0;
+if (windowWidth > 768) {
+    //this is for mobile 
+    top_ = 60;
+} else {
+    //this is for desktop
+    top_ = 100;
+}
+
+
 $(document).ready(function () {
     $(".menu_item").click(function (e) {
         e.preventDefault();
         $(this).parent().addClass("active").siblings().removeClass("active");
+        //for smooth scroll
+        if ($("body").hasClass("active")) {
+            $("body").removeClass("active");
+            $(".menu_item").removeClass("active");
+            $("nav").removeClass("active");
+        }
+        let target = this.hash;
+        let $target = $(target);
+        $('html, body').animate({
+            scrollTop: $target.offset().top - top_
+        }, 1000);
     })
     //toggle mobile menu
     $(".menu_icon").click(function () {
@@ -65,4 +87,6 @@ $(document).ready(function () {
     })
 })
 
-//rest will be in part 2
+//rest will in third part
+//please keep watching and subscribe my channel;
+//thank you;
